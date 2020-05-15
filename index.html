@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="tel" id="inp">
+    <button id="btn">点击</button>
+    <script>
+        btn.onclick = ()=>{
+            let worker = new Worker('workers.js')
+            console.log(`主线程发送的信息是${inp.value}`)
+            worker.onmessage = e =>{
+                alert(`主线程接收到的信息是${e.data}`)
+            }
+            worker.postMessage(inp.value)
+        }
+    </script>
+</body>
+</html>
